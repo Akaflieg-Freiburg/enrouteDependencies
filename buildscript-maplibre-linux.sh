@@ -2,6 +2,8 @@
 
 export Qt6_DIR_BASE=/home/kebekus/Software/buildsystems/Qt/6.6.0
 
+echo
+echo "Linux Desktop"
 mkdir -p build-maplibre-native-qt-linux
 $Qt6_DIR_BASE/gcc_64/bin/qt-cmake \
     -S  maplibre-native-qt \
