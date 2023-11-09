@@ -26,9 +26,11 @@ This build script runs on a Linux host. It compiles maplibre-native-qt for the f
 
 The script expects that the following environment variables are set.
 
-- Qt6_DIR_BASE … path to the Qt installation tree, as downloaded with the Qt Online installer.
-- ANDROID_SDK_ROOT … path to the Android software development kit
-- ANDROID_NDK_ROOT … path to an Android native development kit, compatible with the relevant version of Qt
+| Variable          | Content
+|-------------------|---------------------------------
+| Qt6_DIR_BASE      | path to the Qt installation tree, as downloaded with the Qt Online installer.
+| ANDROID_SDK_ROOT  | path to the Android software development kit
+| ANDROID_NDK_ROOT  | path to an Android native development kit, compatible with the relevant version of Qt
 
 The script expects to find the Qt development files in the typical layout provided by the Qt installer.
 
