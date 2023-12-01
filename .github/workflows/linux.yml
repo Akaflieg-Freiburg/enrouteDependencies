@@ -28,7 +28,6 @@ jobs:
         $Qt6_DIR/bin/qt-cmake \
         -S  maplibre-native-qt \
         -B build \
-        -G Ninja \
         -DMLN_QT_WITH_INTERNAL_ICU=ON \
         -DBUILD_TESTING=OFF \
         -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
