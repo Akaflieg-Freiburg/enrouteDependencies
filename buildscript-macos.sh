@@ -3,9 +3,21 @@
 # Fail on first error
 set -e
 
+echo
+echo "libzip for macOS"
+
+$Qt6_DIR_BASE/macos/bin/qt-cmake \
+    -G Ninja  \
+    -S libzip \
+    -B build-libzip-macOS \
+    -DENABLE_ZSTD=OFF \
+    -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+    -DCMAKE_INSTALL_PREFIX=$Qt6_DIR_BASE/macos \ 
+cmake --build build-libzip-macOS
+cmake --install build-libzip-macOS
 
 echo
-echo "maplibre for macOS Desktop"
+echo "maplibre for macOS"
 
 $Qt6_DIR_BASE/macos/bin/qt-cmake \
     -S  maplibre-native-qt \
