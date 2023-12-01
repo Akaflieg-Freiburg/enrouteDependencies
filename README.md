@@ -1,6 +1,6 @@
 # enrouteDependencies
 
-This repository hosts build scripts for the dependencies of Enroute Flight Navigation. Currently, this is the maplibre port for Qt, [maplibre-native-qt](https://github.com/maplibre/maplibre-native-qt).
+This repository hosts build scripts for the dependencies of Enroute Flight Navigation. Currently, this is the maplibre port for Qt, [maplibre-native-qt](https://github.com/maplibre/maplibre-native-qt). On iOS, these are a universal static libraries for libzip and zlib. 
 
 
 ## Cloning this repository
@@ -12,14 +12,12 @@ git submodule update --init --recursive
 ```
 
 
-## Using the build script
-
-At present, there is one build script.
+## Using the build scripts
 
 
-### buildscript-maplibre-linux.sh 
+### buildscript-android.sh 
 
-This build script runs on a Linux host. It compiles maplibre-native-qt for the following platforms and installs the binaries directly into the Qt development tree. 
+This build script runs on a Linux or macOS host. It compiles maplibre-native-qt and installs the binaries directly into the Qt development tree. 
 
 
 #### Prerequisites
@@ -36,7 +34,6 @@ The script expects to find the Qt development files in the typical layout provid
 
 |Platform           | Path
 |-------------------|---------------------------------
-|Linux/Desktop      | $Qt6_DIR_BASE/gcc_64
 |Android/armv7      | $Qt6_DIR_BASE/android_armv7
 |Android/arm64_v8a  | $Qt6_DIR_BASE/android_arm64_v8a
 |Android/x86        | $Qt6_DIR_BASE/android_x86
@@ -52,4 +49,76 @@ export ANDROID_SDK_ROOT=$HOME/Software/buildsystems/AndroidSDK
 export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.1.8937393
 export Qt6_DIR_BASE=/home/kebekus/Software/buildsystems/Qt/6.6.0
 ./buildscript-maplibre-linux.sh 
+```
+
+
+### buildscript-ios.sh 
+
+This build script runs on a macOS host. It compiles universal static libraries for libzip and zlib, and installs the binaries directly into the Qt development tree. 
+
+
+#### Prerequisites
+
+The script expects that the following environment variables are set.
+
+| Variable          | Content
+|-------------------|---------------------------------
+| Qt6_DIR_BASE      | path to the Qt installation tree, as downloaded with the Qt Online installer.
+
+
+#### Typical invocation
+
+On the author's machine, the following will work.
+
+```
+export Qt6_DIR_BASE=/Users/kebekus/Software/buildsystems/Qt/6.4.3
+./buildscript-ios.sh 
+```
+
+
+### buildscript-linux.sh 
+
+This build script runs on a Linux host. It compiles maplibre-native-qt for the following platforms and installs the binaries directly into the Qt development tree. 
+
+
+#### Prerequisites
+
+The script expects that the following environment variables are set.
+
+| Variable          | Content
+|-------------------|---------------------------------
+| Qt6_DIR_BASE      | path to the Qt installation tree, as downloaded with the Qt Online installer.
+
+
+#### Typical invocation
+
+On the author's machine, the following will work.
+
+```
+export Qt6_DIR_BASE=/home/kebekus/Software/buildsystems/Qt/6.6.0
+./buildscript-linux.sh 
+```
+
+
+### buildscript-macos.sh 
+
+This build script runs on a macOS host. It compiles maplibre-native-qt for the following platforms and installs the binaries directly into the Qt development tree. 
+
+
+#### Prerequisites
+
+The script expects that the following environment variables are set.
+
+| Variable          | Content
+|-------------------|---------------------------------
+| Qt6_DIR_BASE      | path to the Qt installation tree, as downloaded with the Qt Online installer.
+
+
+#### Typical invocation
+
+On the author's machine, the following will work.
+
+```
+export Qt6_DIR_BASE=/Users/kebekus/Software/buildsystems/Qt/6.6.0
+./buildscript-macos.sh 
 ```
