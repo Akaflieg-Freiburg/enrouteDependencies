@@ -1,0 +1,48 @@
+name: Compile on Linux
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: true 
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        cache: 'true'
+        version: '6.*.*'
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: linux
+    - name: Compile
+      run: |
+        $Qt6_DIR/bin/qt-cmake \
+        -S  maplibre-native-qt \
+        -B build \
+        -G Ninja \
+        -DMLN_QT_WITH_INTERNAL_ICU=ON \
+        -DBUILD_TESTING=OFF \
+        -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
+        -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
+        -DCMAKE_INSTALL_PREFIX=gcc_64
+    - name: Compile and Install
+      run: |
+        cmake --build build
+        cmake --build build --target install
+    - name: Package
+      run: |
+        tar cvfz enrouteDependencies_linux.tar.gz gcc_64
+    - name: Upload to developerBuilds
+      run: |
+        gh release upload --clobber developerBuilds *.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
