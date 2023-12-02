@@ -8,7 +8,7 @@ echo
 echo "Linux Desktop"
 
 $Qt6_DIR_BASE/gcc_64/bin/qt-cmake \
-    -S  maplibre-native-qt \
+    -S maplibre-native-qt \
     -B build-maplibre-native-qt-linux \
     -G Ninja \
     -DMLN_QT_WITH_INTERNAL_ICU=ON \

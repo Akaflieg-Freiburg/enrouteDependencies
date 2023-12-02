@@ -24,18 +24,16 @@ jobs:
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: linux
-    - name: Compile
+    - name: Compile and Install
       run: |
         $Qt6_DIR/bin/qt-cmake \
-        -S  maplibre-native-qt \
+        -S maplibre-native-qt \
         -B build \
         -DMLN_QT_WITH_INTERNAL_ICU=ON \
         -DBUILD_TESTING=OFF \
         -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
         -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
         -DCMAKE_INSTALL_PREFIX=gcc_64
-    - name: Compile and Install
-      run: |
         cmake --build build
         cmake --build build --target install
     - name: Package
