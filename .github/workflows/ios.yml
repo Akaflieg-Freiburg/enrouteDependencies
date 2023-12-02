@@ -41,7 +41,7 @@ jobs:
         -DCMAKE_INSTALL_PREFIX=ios
         cmake --build build-zlib-ios
         cmake --install build-zlib-ios
-        cp ios/* $Qt6_DIR
+        cp -rv ios/* $Qt6_DIR
     - name: Configure and compile libzip
       run: |
         cmake -E make_directory build
