@@ -1,4 +1,4 @@
-name: Compile on iOS
+name: Compile on ios
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        submodules: true
+        submodules: recursive
     - name: Install Qt for Desktop
       uses: jurplel/install-qt-action@v3
       with:
@@ -21,7 +21,7 @@ jobs:
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
-    - name: Install Qt for iOS
+    - name: Install Qt for ios
       uses: jurplel/install-qt-action@v3
       with:
         cache: 'true'
@@ -36,18 +36,18 @@ jobs:
         $Qt6_DIR/bin/qt-cmake \
         -G Ninja \
         -S zlib \
-        -B build-zlib-iOS \
+        -B build-zlib-ios \
         -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
         -DCMAKE_INSTALL_PREFIX=ios
-        cmake --build build-zlib-iOS
-        cmake --install build-zlib-iOS
+        cmake --build build-zlib-ios
+        cmake --install build-zlib-ios
     - name: Configure and compile libzip
       run: |
         cmake -E make_directory build
         $Qt6_DIR/bin/qt-cmake \
         -G Ninja  \
         -S libzip \
-        -B build-libzip-iOS \
+        -B build-libzip-ios \
         -DBUILD_DOC=OFF \
         -DBUILD_EXAMPLES=OFF \
         -DBUILD_REGRESS=OFF \
@@ -57,9 +57,10 @@ jobs:
         -DENABLE_LZMA=OFF \
         -DENABLE_ZSTD=OFF \
         -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+        -DCMAKE_PREFIX_PATH=ios \
         -DCMAKE_INSTALL_PREFIX=ios
-        cmake --build build-libzip-iOS
-        cmake --install build-libzip-iOS
+        cmake --build build-libzip-ios
+        cmake --install build-libzip-ios
     - name: Package
       run: |
         tar cvfz enrouteDependencies_ios.tar.gz ios
