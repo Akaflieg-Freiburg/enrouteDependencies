@@ -2,7 +2,7 @@ name: Compile on Linux
 
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/actions ]
 
 jobs:
   build:
@@ -26,19 +26,10 @@ jobs:
         key: linux
     - name: Compile and Install
       run: |
-        $Qt6_DIR/bin/qt-cmake \
-        -S maplibre-native-qt \
-        -B build \
-        -DMLN_QT_WITH_INTERNAL_ICU=ON \
-        -DBUILD_TESTING=OFF \
-        -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
-        -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
-        -DCMAKE_INSTALL_PREFIX=gcc_64
-        cmake --build build
-        cmake --build build --target install
+        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-linux.sh
     - name: Package
       run: |
-        tar cvfz enrouteDependencies_linux.tar.gz gcc_64
+        tar cvfz enrouteDependencies_Qt$(filename $(dirname $(dirname "$Qt6_DIR")))_linux.tar.gz Qt
     - name: Upload to developerBuilds
       run: |
         gh release upload --clobber developerBuilds *.tar.gz
