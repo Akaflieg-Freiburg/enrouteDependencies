@@ -44,7 +44,6 @@ jobs:
         cp -rv ios/* $Qt6_DIR
     - name: Configure and compile libzip
       run: |
-        cmake -E make_directory build
         $Qt6_DIR/bin/qt-cmake \
         -G Ninja  \
         -S libzip \
@@ -54,9 +53,6 @@ jobs:
         -DBUILD_REGRESS=OFF \
         -DBUILD_SHARED_LIBS=OFF \
         -DBUILD_TOOLS=OFF \
-        -DENABLE_BZIP2=OFF \
-        -DENABLE_LZMA=OFF \
-        -DENABLE_ZSTD=OFF \
         -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
         -DCMAKE_PREFIX_PATH=ios \
         -DCMAKE_INSTALL_PREFIX=ios
