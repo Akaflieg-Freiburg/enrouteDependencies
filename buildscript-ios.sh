@@ -2,6 +2,24 @@
 
 # Fail on first error
 set -e
+installDir=Qt/$(basename "$Qt6_DIR_BASE")/ios
+
+
+echo
+echo "bzip2 - static for arm64 and x86_64 on iOS"
+
+$Qt6_DIR_BASE/ios/bin/qt-cmake \
+    -G Ninja  \
+    -S bzip2 \
+    -B build-bzip2-iOS \
+    -DENABLE_APP=OFF \
+    -DENABLE_DOCS=OFF \
+    -DENABLE_SHARED_LIB=OFF \
+    -DENABLE_STATIC_LIB=ON \
+    -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+    -DCMAKE_INSTALL_PREFIX=$installDir
+cmake --build build-bzip2-iOS
+cmake --install build-bzip2-iOS
 
 
 echo
@@ -12,9 +30,16 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
     -S zlib \
     -B build-zlib-iOS \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-    -DCMAKE_INSTALL_PREFIX=$Qt6_DIR_BASE/ios
+    -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-zlib-iOS
 cmake --install build-zlib-iOS
+
+
+echo
+echo "copy static bzip2 and zlib to development directory, so cmake can find it"
+
+cp -rv $installDir $Qt6_DIR_BASE
+
 
 echo
 echo "libzip - static for arm64 and x86_64 on iOS"
@@ -32,6 +57,6 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
     -DENABLE_LZMA=OFF \
     -DENABLE_ZSTD=OFF \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-    -DCMAKE_INSTALL_PREFIX=$Qt6_DIR_BASE/ios
+    -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-libzip-iOS
 cmake --install build-libzip-iOS
