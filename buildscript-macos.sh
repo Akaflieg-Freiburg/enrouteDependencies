@@ -3,6 +3,8 @@
 # Fail on first error
 set -e
 
+installDir=Qt/$(basename "$Qt6_DIR_BASE")/macos
+
 echo
 echo "libzip for macOS"
 
@@ -12,7 +14,7 @@ $Qt6_DIR_BASE/macos/bin/qt-cmake \
     -B build-libzip-macOS \
     -DENABLE_ZSTD=OFF \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-    -DCMAKE_INSTALL_PREFIX=$Qt6_DIR_BASE/macos \ 
+    -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-libzip-macOS
 cmake --install build-libzip-macOS
 
@@ -27,6 +29,6 @@ $Qt6_DIR_BASE/macos/bin/qt-cmake \
     -DBUILD_TESTING=OFF \
     -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
     -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
-    -DCMAKE_INSTALL_PREFIX=$Qt6_DIR_BASE/macos
+    -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-maplibre-native-qt-macOS
 cmake --install build-maplibre-native-qt-macOS
