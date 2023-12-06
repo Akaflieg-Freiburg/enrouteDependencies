@@ -30,37 +30,13 @@ jobs:
         version: '6.5.2'
     - name: Install software
       run: |
-        brew install cmake ninja
-    - name: Configure and compile zlib
+        brew install ninja
+    - name: Compile and Install
       run: |
-        $Qt6_DIR/bin/qt-cmake \
-        -G Ninja \
-        -S zlib \
-        -B build-zlib-ios \
-        -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-        -DCMAKE_INSTALL_PREFIX=ios
-        cmake --build build-zlib-ios
-        cmake --install build-zlib-ios
-        cp -rv ios/* $Qt6_DIR
-    - name: Configure and compile libzip
-      run: |
-        $Qt6_DIR/bin/qt-cmake \
-        -G Ninja  \
-        -S libzip \
-        -B build-libzip-ios \
-        -DBUILD_DOC=OFF \
-        -DBUILD_EXAMPLES=OFF \
-        -DBUILD_REGRESS=OFF \
-        -DBUILD_SHARED_LIBS=OFF \
-        -DBUILD_TOOLS=OFF \
-        -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-        -DCMAKE_PREFIX_PATH=ios \
-        -DCMAKE_INSTALL_PREFIX=ios
-        cmake --build build-libzip-ios
-        cmake --install build-libzip-ios
+        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-ios.sh
     - name: Package
       run: |
-        tar cvfz enrouteDependencies_ios.tar.gz ios
+        tar cvfz enrouteDependencies_ios.tar.gz Qt
     - name: Upload to developerBuilds
       run: |
         gh release upload --clobber developerBuilds *.tar.gz
