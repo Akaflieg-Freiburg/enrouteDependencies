@@ -1,13 +1,13 @@
-name: Compile on macOS
+name: Compile on Windows
 
 on:
   push:
-    branches: [ feature/actions ]
+    branches: [ main ]
 
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: windows-latest
     
     steps:
     - name: Checkout
@@ -22,19 +22,19 @@ jobs:
         version: '6.*.*'
     - name: Install Additional Software
       run: |
-        brew install ninja
+        sudo apt install ninja-build
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: linux
     - name: Compile and Install
       run: |
-        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-macos.sh
+        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-windows.bat
     - name: Package
       run: |
-        tar cvfz enrouteDependencies_macos.tar.gz Qt
+        powershell Compress-Archive Qt enrouteDependencies_windows64.zip
     - name: Upload to developerBuilds
       run: |
-        gh release upload --clobber developerBuilds *.tar.gz
+        gh release upload --clobber developerBuilds enrouteDependencies_windows64.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

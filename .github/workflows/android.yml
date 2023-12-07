@@ -23,7 +23,7 @@ jobs:
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
-    - name: Install Qt for Android
+    - name: Install Qt for Android arm64
       uses: jurplel/install-qt-action@v3
       with:
         cache: 'true'
@@ -31,7 +31,34 @@ jobs:
         modules: 'qtlocation qtpositioning'
         target: 'android'
         version: '6.*.*'
-        arch: 'android_arm64_v8a;android_armv7;android_x86;android_x86_64'
+        arch: 'android_arm64_v8a'
+    - name: Install Qt for Android armv7
+      uses: jurplel/install-qt-action@v3
+      with:
+        cache: 'true'
+        cache-key-prefix: 'install-qt-action-android'
+        modules: 'qtlocation qtpositioning'
+        target: 'android'
+        version: '6.*.*'
+        arch: 'android_armv7'
+    - name: Install Qt for Android x86
+      uses: jurplel/install-qt-action@v3
+      with:
+        cache: 'true'
+        cache-key-prefix: 'install-qt-action-android'
+        modules: 'qtlocation qtpositioning'
+        target: 'android'
+        version: '6.*.*'
+        arch: 'android_x86'
+    - name: Install Qt for Android x86_64
+      uses: jurplel/install-qt-action@v3
+      with:
+        cache: 'true'
+        cache-key-prefix: 'install-qt-action-android'
+        modules: 'qtlocation qtpositioning'
+        target: 'android'
+        version: '6.*.*'
+        arch: 'android_x86_64'
     - name: Install Additional Software
       run: |
         sudo apt install ninja-build
