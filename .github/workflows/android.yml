@@ -32,33 +32,6 @@ jobs:
         target: 'android'
         version: '6.*.*'
         arch: 'android_arm64_v8a'
-    - name: Install Qt for Android armv7
-      uses: jurplel/install-qt-action@v3
-      with:
-        cache: 'true'
-        cache-key-prefix: 'install-qt-action-android'
-        modules: 'qtlocation qtpositioning'
-        target: 'android'
-        version: '6.*.*'
-        arch: 'android_armv7'
-    - name: Install Qt for Android x86
-      uses: jurplel/install-qt-action@v3
-      with:
-        cache: 'true'
-        cache-key-prefix: 'install-qt-action-android'
-        modules: 'qtlocation qtpositioning'
-        target: 'android'
-        version: '6.*.*'
-        arch: 'android_x86'
-    - name: Install Qt for Android x86_64
-      uses: jurplel/install-qt-action@v3
-      with:
-        cache: 'true'
-        cache-key-prefix: 'install-qt-action-android'
-        modules: 'qtlocation qtpositioning'
-        target: 'android'
-        version: '6.*.*'
-        arch: 'android_x86_64'
     - name: Install Additional Software
       run: |
         sudo apt install ninja-build
@@ -72,12 +45,39 @@ jobs:
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: android
-    - name: Compile and Install
+    - name: Compile and Install libzip
       run: |
-        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-android.sh
+        $Qt6_DIR/bin/qt-cmake \
+    	  -G Ninja  \
+	      -S libzip \
+    	  -B build-libzip \
+	      -DBUILD_DOC=OFF \
+    	  -DBUILD_EXAMPLES=OFF \
+	      -DBUILD_REGRESS=OFF \
+    	  -DBUILD_SHARED_LIBS=OFF \
+	      -DBUILD_TOOLS=OFF \
+    	  -DENABLE_BZIP2=OFF \
+	      -DENABLE_LZMA=OFF \
+    	  -DENABLE_ZSTD=OFF \
+    	  -DCMAKE_INSTALL_PREFIX=Qt
+	      cmake --build build-libzip
+        cmake --install build-libzip
+    - name: Compile and Install maplibre-native-qt
+      run: |
+        $Qt6_DIR/bin/qt-cmake \
+		    -S maplibre-native-qt \
+        -B build-maplibre-native-qt \
+        -G Ninja \
+        -DBUILD_TESTING=OFF \
+        -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
+        -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
+        -DCMAKE_PREFIX_PATH=$Qt6_DIR \
+        -DCMAKE_INSTALL_PREFIX=Qt
+        cmake --build build-maplibre-native-qt
+        cmake --install build-maplibre-native-qt
     - name: Package
       run: |
-        tar cvfz enrouteDependencies_android.tar.gz Qt
+        tar cvfz enrouteDependencies_android_arm64.tar.gz Qt
     - name: Upload to developerBuilds
       run: |
         gh release upload --clobber developerBuilds *.tar.gz
