@@ -30,38 +30,38 @@ jobs:
     - name: Compile and Install libzip
       run: |
         qt-cmake \
-    	  -G Ninja  \
-	      -S libzip \
-    	  -B build-libzip \
-	      -DBUILD_DOC=OFF \
-    	  -DBUILD_EXAMPLES=OFF \
-	      -DBUILD_REGRESS=OFF \
-    	  -DBUILD_SHARED_LIBS=OFF \
-	      -DBUILD_TOOLS=OFF \
-    	  -DENABLE_BZIP2=OFF \
-	      -DENABLE_LZMA=OFF \
-    	  -DENABLE_ZSTD=OFF \
-    	  -DCMAKE_INSTALL_PREFIX=Qt
-	      cmake --build build-libzip
+          -G Ninja  \
+          -S libzip \
+          -B build-libzip \
+          -DBUILD_DOC=OFF \
+          -DBUILD_EXAMPLES=OFF \
+          -DBUILD_REGRESS=OFF \
+          -DBUILD_SHARED_LIBS=OFF \
+          -DBUILD_TOOLS=OFF \
+          -DENABLE_BZIP2=OFF \
+          -DENABLE_LZMA=OFF \
+          -DENABLE_ZSTD=OFF \
+          -DCMAKE_INSTALL_PREFIX=Qt\win64_msvc2019_64
+        cmake --build build-libzip
         cmake --install build-libzip
     - name: Compile and Install maplibre-native-qt
       run: |
         qt-cmake \
-		    -S maplibre-native-qt \
-        -B build-maplibre-native-qt \
-        -G Ninja \
-        -DBUILD_TESTING=OFF \
-        -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
-        -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
-        -DCMAKE_PREFIX_PATH=$Qt6_DIR \
-        -DCMAKE_INSTALL_PREFIX=Qt
+          -S maplibre-native-qt \
+          -B build-maplibre-native-qt \
+          -G Ninja \
+          -DBUILD_TESTING=OFF \
+          -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
+          -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
+          -DCMAKE_PREFIX_PATH=$Qt6_DIR \
+          -DCMAKE_INSTALL_PREFIX=Qt\win64_msvc2019_64
         cmake --build build-maplibre-native-qt
         cmake --install build-maplibre-native-qt
     - name: Package
       run: |
-        powershell Compress-Archive Qt enrouteDependencies_windows64.zip
+        powershell Compress-Archive Qt enrouteDependencies_win64_msvc2019.zip
     - name: Upload to developerBuilds
       run: |
-        gh release upload --clobber developerBuilds enrouteDependencies_windows64.zip
+        gh release upload --clobber developerBuilds enrouteDependencies_win64_msvc2019.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

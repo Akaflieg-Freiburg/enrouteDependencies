@@ -2,7 +2,7 @@ name: Compile on iOS
 
 on:
   push:
-    branches: [ feature/actions ]
+    branches: [ main ]
 
 jobs:
   build:
