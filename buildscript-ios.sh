@@ -60,3 +60,16 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
     -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-libzip-iOS
 cmake --install build-libzip-iOS
+
+echo
+echo "maplibre for iOS"
+
+$Qt6_DIR_BASE/ios/bin/qt-cmake \
+    -S maplibre-native-qt \
+    -B build-maplibre-native-qt-iOS \
+    -G"Ninja Multi-Config" \
+    -DCMAKE_CONFIGURATION_TYPES="Release;Debug" \
+    -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+    -DCMAKE_INSTALL_PREFIX=$installDir
+cmake --build build-maplibre-native-qt-iOS
+cmake --install build-maplibre-native-qt-iOS
