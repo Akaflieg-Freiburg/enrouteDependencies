@@ -1,8 +1,8 @@
-name: Compile on ios
+name: Compile on iOS
 
 on:
   push:
-    branches: [ feature/actions ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -10,6 +10,8 @@ jobs:
     runs-on: macos-latest
  
     steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
     - name: Checkout
       uses: actions/checkout@v4
       with:
@@ -19,7 +21,7 @@ jobs:
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-macOS-host'
-        version: '6.5.2'
+        version: '6.*.*'
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
@@ -29,7 +31,7 @@ jobs:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-ios'
         target: 'ios'
-        version: '6.5.2'
+        version: '6.*.*'
     - name: Install software
       run: |
         brew install ninja

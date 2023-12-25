@@ -1,8 +1,8 @@
-name: Compile on Linux
+name: Compile on macOS
 
 on:
   push:
-    branches: [ feature/actions ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         version: '6.*.*'
     - name: Install Additional Software
       run: |
-        sudo apt install ninja-build
+        brew install ninja
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2
       with:
