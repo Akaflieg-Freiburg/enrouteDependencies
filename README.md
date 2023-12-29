@@ -1,3 +1,5 @@
+[![Compile on Android](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/android.yml/badge.svg)](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/android.yml) [![Compile on iOS](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/ios.yml/badge.svg)](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/ios.yml) [![Compile on Linux](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/linux.yml/badge.svg)](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/linux.yml) [![Compile on macOS](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/macos.yml/badge.svg)](https://github.com/Akaflieg-Freiburg/enrouteDependencies/actions/workflows/macos.yml)
+
 # enrouteDependencies
 
 This repository hosts build scripts for the dependencies of Enroute Flight Navigation. Currently, this is the maplibre port for Qt, [maplibre-native-qt](https://github.com/maplibre/maplibre-native-qt). On iOS, these are a universal static libraries for libzip and zlib. 
