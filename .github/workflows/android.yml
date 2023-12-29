@@ -19,7 +19,7 @@ jobs:
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-host'
-        version: '6.*.*'
+        version: '6.6.*'
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
@@ -30,7 +30,7 @@ jobs:
         cache-key-prefix: 'install-qt-action-android'
         modules: 'qtlocation qtpositioning'
         target: 'android'
-        version: '6.*.*'
+        version: '6.6.*'
         arch: 'android_arm64_v8a'
     - name: Install Additional Software
       run: |
