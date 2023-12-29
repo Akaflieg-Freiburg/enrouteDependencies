@@ -30,6 +30,7 @@ jobs:
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-ios'
+        modules: 'qtlocation qtpositioning'
         target: 'ios'
         version: '6.*.*'
     - name: Install software
