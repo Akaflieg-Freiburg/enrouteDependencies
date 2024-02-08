@@ -34,6 +34,9 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
 cmake --build build-zlib-iOS
 cmake --install build-zlib-iOS
 
+# Delete dynamic libraries, which create trouble under iOS
+rm $installDir/lib/libz*dylib
+
 
 echo
 echo "copy static bzip2 and zlib to development directory, so cmake can find it"
