@@ -2,7 +2,7 @@ name: Sources
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -19,6 +19,6 @@ jobs:
         cd maplibre-native-qt; tar cvJf ../maplibre-native-qt.tar.xz --exclude='.git' .
     - name: Upload to developerBuilds
       run: |
-        gh release upload --clobber developerBuilds *.tar.XZ
+        gh release upload --clobber developerBuilds *.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
