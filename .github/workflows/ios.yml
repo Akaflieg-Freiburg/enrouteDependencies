@@ -21,7 +21,7 @@ jobs:
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-macOS-host'
-        version: '6.*.*'
+        version: '6.7.*'
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
@@ -32,7 +32,7 @@ jobs:
         cache-key-prefix: 'install-qt-action-ios'
         modules: 'qtlocation qtpositioning'
         target: 'ios'
-        version: '6.*.*'
+        version: '6.7.*'
     - name: Install software
       run: |
         brew install ninja
