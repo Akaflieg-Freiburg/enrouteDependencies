@@ -3,6 +3,15 @@ name: Compile on Windows
 on:
   push:
     branches: [ feature/actions ]
+    paths-ignore:
+      - ".gitignore"
+      - "README.md"
+      # ignore CI for other platforms
+      - ".github/workflows/android.yml"
+      - ".github/workflows/ios.yml"
+      - ".github/workflows/linux.yml"
+      - ".github/workflows/macos.yml"
+      - ".github/workflows/sources.yml"
 
 jobs:
   build:

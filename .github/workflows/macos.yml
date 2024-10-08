@@ -3,6 +3,15 @@ name: Compile on macOS
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - ".gitignore"
+      - "README.md"
+      # ignore CI for other platforms
+      - ".github/workflows/android.yml"
+      - ".github/workflows/ios.yml"
+      - ".github/workflows/linux.yml"
+      - ".github/workflows/sources.yml"
+      - ".github/workflows/windows.yml"
 
 jobs:
   build:
