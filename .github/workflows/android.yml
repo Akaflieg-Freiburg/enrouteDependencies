@@ -24,9 +24,6 @@ jobs:
       with:
         fetch-depth: 0
         submodules: recursive
-    - name: Set QT_HOST_PATH
-      run: |
-        echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
     - name: Install Qt for Android arm64
       uses: jurplel/install-qt-action@v4
       with:
@@ -76,9 +73,6 @@ jobs:
     - name: Compile and Install maplibre-native-qt
       run: |
         export QT_HOST_PATH="$(readlink -f "$QT_ROOT_DIR/../gcc_64")"
-        echo $QT_ROOT_DIR
-        ls $QT_ROOT_DIR/..
-        echo $QT_HOST_PATH
         $QT_ROOT_DIR/bin/qt-cmake \
           -S maplibre-native-qt \
           -B build-maplibre-native-qt \
