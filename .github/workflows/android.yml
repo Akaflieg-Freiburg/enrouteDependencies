@@ -58,10 +58,6 @@ jobs:
         key: android
     - name: Compile and Install libzip
       run: |
-        export QT_HOST_PATH="$(readlink -f "$QT_ROOT_DIR/../gcc_64")"
-        echo $QT_ROOT_DIR
-        ls $QT_ROOT_DIR/..
-        echo $QT_HOST_PATH
         $QT_ROOT_DIR/bin/qt-cmake \
           -G Ninja  \
           -S libzip \
@@ -79,7 +75,11 @@ jobs:
         cmake --install build-libzip
     - name: Compile and Install maplibre-native-qt
       run: |
-        $Qt6_DIR/bin/qt-cmake \
+        export QT_HOST_PATH="$(readlink -f "$QT_ROOT_DIR/../gcc_64")"
+        echo $QT_ROOT_DIR
+        ls $QT_ROOT_DIR/..
+        echo $QT_HOST_PATH
+        $QT_ROOT_DIR/bin/qt-cmake \
           -S maplibre-native-qt \
           -B build-maplibre-native-qt \
           -G Ninja \
