@@ -41,7 +41,7 @@ jobs:
         cache-key-prefix: 'install-qt-action-ios'
         modules: 'qtlocation qtpositioning'
         target: 'ios'
-        version: '6.7.*'
+        version: '6.8.*'
     - name: Install software
       run: |
         brew install ninja
