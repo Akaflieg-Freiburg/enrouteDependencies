@@ -28,7 +28,7 @@ jobs:
       with:
         cache: 'true'
         modules: 'qtlocation qtpositioning'
-        version: '6.*.*'
+        version: '6.8.1'
     - name: Install Additional Software
       run: |
         sudo apt install ninja-build
