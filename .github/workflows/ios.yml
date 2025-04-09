@@ -31,9 +31,6 @@ jobs:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-macOS-host'
         version: '6.9.*'
-    - name: Set QT_HOST_PATH
-      run: |
-        echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
     - name: Install Qt for ios
       uses: jdpurcell/install-qt-action@v5
       with:
@@ -47,7 +44,7 @@ jobs:
         brew install ninja
     - name: Compile and Install
       run: |
-        Qt6_DIR_BASE=$(dirname "$Qt6_DIR") ./buildscript-ios.sh
+        Qt6_DIR_BASE=$(dirname "$QT_ROOT_DIR") ./buildscript-ios.sh
     - name: Package
       run: |
         tar cvfz enrouteDependencies_ios.tar.gz Qt
