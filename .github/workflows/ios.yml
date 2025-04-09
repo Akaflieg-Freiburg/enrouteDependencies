@@ -26,22 +26,22 @@ jobs:
       with:
         submodules: recursive
     - name: Install Qt for Desktop
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v4
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-macOS-host'
-        version: '6.9.0'
+        version: '6.9.*'
     - name: Set QT_HOST_PATH
       run: |
         echo QT_HOST_PATH=$Qt6_DIR >> $GITHUB_ENV
     - name: Install Qt for ios
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v4
       with:
         cache: 'true'
         cache-key-prefix: 'install-qt-action-ios'
         modules: 'qtlocation qtpositioning'
         target: 'ios'
-        version: '6.9.0'
+        version: '6.9.*'
     - name: Install software
       run: |
         brew install ninja
