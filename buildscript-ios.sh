@@ -21,7 +21,6 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
 cmake --build build-bzip2-iOS
 cmake --install build-bzip2-iOS
 
-
 echo
 echo "zlib - static for arm64 and x86_64 on iOS"
 
@@ -30,7 +29,9 @@ $Qt6_DIR_BASE/ios/bin/qt-cmake \
     -S zlib \
     -B build-zlib-iOS \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-    -DCMAKE_INSTALL_PREFIX=$installDir
+    -DCMAKE_INSTALL_PREFIX=$installDir \
+    -DCMAKE_CXX_FLAGS="-Wno-macro-redefined" \
+    -DCMAKE_C_FLAGS="-Wno-macro-redefined"
 cmake --build build-zlib-iOS
 cmake --install build-zlib-iOS
 
