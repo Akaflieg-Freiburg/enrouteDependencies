@@ -22,7 +22,7 @@ do
 	    -android-sdk $ANDROID_SDK_ROOT \
 	    -android-ndk $ANDROID_NDK_ROOT \
 	    -ccache \
-	    -submodules qt5compat,qtconnectivity,qthttpserver,qtlocation,qtsensors,qtspeech,qtsvg,qtwebview
+	    -submodules qt5compat,qtconnectivity,qthttpserver,qtlocation,qtsensors,qtspeech,qtsvg,qttranslations,qtwebview
 	ninja install
 	cd ..
 done
