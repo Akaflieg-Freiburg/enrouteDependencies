@@ -10,28 +10,25 @@ do
 
 	echo
 	echo "libzip - static for $PLATFORM"
-
 	$Qt6_DIR_BASE/$PLATFORM/bin/qt-cmake \
-    	-G Ninja  \
-	    -S libzip \
-    	-B build-libzip-$PLATFORM \
-	    -DBUILD_DOC=OFF \
-    	-DBUILD_EXAMPLES=OFF \
-	    -DBUILD_REGRESS=OFF \
-    	-DBUILD_SHARED_LIBS=OFF \
-	    -DBUILD_TOOLS=OFF \
-    	-DENABLE_BZIP2=OFF \
-	    -DENABLE_LZMA=OFF \
-    	-DENABLE_ZSTD=OFF \
-    	-DCMAKE_INSTALL_PREFIX=$installDir
+  	-G Ninja  \
+	  -S libzip \
+  	-B build-libzip-$PLATFORM \
+	  -DBUILD_DOC=OFF \
+   	-DBUILD_EXAMPLES=OFF \
+	  -DBUILD_REGRESS=OFF \
+   	-DBUILD_SHARED_LIBS=OFF \
+	  -DBUILD_TOOLS=OFF \
+   	-DENABLE_BZIP2=OFF \
+	  -DENABLE_LZMA=OFF \
+   	-DENABLE_ZSTD=OFF \
+  	-DCMAKE_INSTALL_PREFIX=$installDir
 	cmake --build build-libzip-$PLATFORM
 	cmake --install build-libzip-$PLATFORM
 
-
-    echo
-    echo "maplibre-native-qt - for $PLATFORMARM"
-
-    $Qt6_DIR_BASE/$PLATFORM/bin/qt-cmake \
+  echo
+  echo "maplibre-native-qt - for $PLATFORMARM"
+  $Qt6_DIR_BASE/$PLATFORM/bin/qt-cmake \
 		-S maplibre-native-qt \
 		-B build-maplibre-native-qt-$PLATFORM \
 		-G Ninja \
@@ -39,7 +36,8 @@ do
 		-DCMAKE_C_COMPILER_LAUNCHER="ccache" \
 		-DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
 		-DCMAKE_PREFIX_PATH=$Qt6_DIR_BASE/$PLATFORM \
+    -DMLN_WITH_OPENGL=ON \
 		-DCMAKE_INSTALL_PREFIX=$installDir
-    cmake --build build-maplibre-native-qt-$PLATFORM
-    cmake --install build-maplibre-native-qt-$PLATFORM
+  cmake --build build-maplibre-native-qt-$PLATFORM
+  cmake --install build-maplibre-native-qt-$PLATFORM
 done

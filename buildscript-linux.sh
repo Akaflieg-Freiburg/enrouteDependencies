@@ -13,6 +13,7 @@ $Qt6_DIR_BASE/gcc_64/bin/qt-cmake \
     -B build-maplibre-native-qt-linux \
     -G Ninja \
     -DMLN_QT_WITH_INTERNAL_ICU=ON \
+    -DMLN_WITH_OPENGL=ON \
     -DBUILD_TESTING=OFF \
     -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
     -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
