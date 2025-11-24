@@ -61,7 +61,7 @@ if(NOT MLN_QT_WITH_INTERNAL_SQLITE)
     find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Sql REQUIRED)
 endif()
 if(MLN_QT_WITH_LOCATION)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Location REQUIRED) # location
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Location LocationPrivate REQUIRED) # location
 endif()
 if(MLN_QT_WITH_WIDGETS)
     if(Qt6_FOUND)
