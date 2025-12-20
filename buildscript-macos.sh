@@ -12,6 +12,7 @@ $Qt6_DIR_BASE/macos/bin/qt-cmake \
     -G Ninja  \
     -S libzip \
     -B build-libzip-macOS \
+    -DENABLE_LZMA=OFF \
     -DENABLE_ZSTD=OFF \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
     -DCMAKE_INSTALL_PREFIX=$installDir
@@ -22,7 +23,7 @@ echo
 echo "maplibre for macOS"
 
 $Qt6_DIR_BASE/macos/bin/qt-cmake \
-    -S  maplibre-native-qt \
+    -S maplibre-native-qt-flat \
     -B build-maplibre-native-qt-macOS \
     -G Ninja \
     -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
