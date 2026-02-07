@@ -32,7 +32,7 @@ do
     echo "maplibre-native-qt - for $PLATFORMARM"
 
     $Qt6_DIR_BASE/$PLATFORM/bin/qt-cmake \
-		-S maplibre-native-qt \
+		-S maplibre-native-qt-flat \
 		-B build-maplibre-native-qt-$PLATFORM \
 		-G Ninja \
 		-DBUILD_TESTING=OFF \

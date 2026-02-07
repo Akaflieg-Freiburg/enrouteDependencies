@@ -69,7 +69,7 @@ echo
 echo "maplibre for iOS"
 
 $Qt6_DIR_BASE/ios/bin/qt-cmake \
-    -S maplibre-native-qt \
+    -S maplibre-native-qt-flat \
     -B build-maplibre-native-qt-iOS \
     -G"Ninja Multi-Config" \
     -DCMAKE_CONFIGURATION_TYPES="Release;Debug" \
