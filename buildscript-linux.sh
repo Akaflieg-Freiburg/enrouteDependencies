@@ -16,6 +16,7 @@ $Qt6_DIR_BASE/gcc_64/bin/qt-cmake \
     -DBUILD_TESTING=OFF \
     -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
     -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
+    -DCMAKE_CXX_FLAGS="-Wno-sfinae-incomplete" \
     -DCMAKE_PREFIX_PATH=$Qt6_DIR_BASE/gcc_64 \
     -DCMAKE_INSTALL_PREFIX=$installDir
 cmake --build build-maplibre-native-qt-linux
